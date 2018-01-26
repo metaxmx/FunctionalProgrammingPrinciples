@@ -1,5 +1,7 @@
 package examples
 
+import scala.annotation.tailrec
+
 object E10_Fold {
 
   def sum(numbers: Seq[Int]): Int = numbers.fold(0)(_ + _)
@@ -16,5 +18,18 @@ object E10_Fold {
   }
 
   def combineLines(lines: Seq[String]): String = lines.fold("")(_ + "\n" + _)
+
+  @tailrec
+  def sum(numbers: List[Int], sumSoFar: Int): Int = numbers match {
+    case Nil => 0
+    case head :: tail => sum(tail, sumSoFar + head)
+  }
+
+  def sumX(numbers: Seq[Int]) = {
+    (0 /: numbers)(_ + _)
+  }
+
+
+  println(sum(Range(1, 10000).toList))
 
 }

@@ -23,6 +23,13 @@ object E9_Future {
     }
   }
 
+  for {
+    value <- future
+    dbValue <- loadValueFromDataBase()
+  } yield {
+    value + dbValue
+  }
+
   future.onComplete {
     case Success(number) => println(s"Result: $number")
     case Failure(e) => println("No luck this time ;-(")
